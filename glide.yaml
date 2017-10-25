@@ -9,8 +9,6 @@ import:
   version: 9ff6c6923cfffbcd502984b8e0c80539a94968b7
 - package: github.com/Masterminds/vcs
   version: ~1.11.0
-
-  # Pin version of mergo that is compatible with both sprig and Kubernetes
 - package: github.com/imdario/mergo
   version: 6633656539c1639d9d78127b7d47c622b5d7b6dc
 - package: github.com/Masterminds/sprig
@@ -27,8 +25,6 @@ import:
   - ptypes/timestamp
 - package: google.golang.org/grpc
   version: 1.2.1
-  # 1.8.1 libs are hosed and need some manual intervention, so pinning to 1.8.0 for now
-  # so others aren't getting errors when running `glide up`
 - package: k8s.io/kubernetes
   version: 1.8.0
 - package: github.com/gosuri/uitable
@@ -37,7 +33,6 @@ import:
 - package: golang.org/x/crypto
   subpackages:
   - openpgp
-  # pin version of golang.org/x/sys that is compatible with golang.org/x/crypto
 - package: golang.org/x/sys
   version: 43eea11
   subpackages:
@@ -56,9 +51,6 @@ import:
 - package: vbom.ml/util
   repo: https://github.com/fvbommel/util.git
   vcs: git
-
-testImports:
-- package: github.com/stretchr/testify
-  version: ^1.1.4
-  subpackages:
-  - assert
+- package: github.com/google/go-jsonnet
+- package: github.com/fatih/color
+  version: ~1.5.0

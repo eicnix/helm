@@ -120,7 +120,12 @@ func (m *Manager) Update() error {
 	// If no requirements file is found, we consider this a successful
 	// completion.
 	req, err := chartutil.LoadRequirements(c)
+	fmt.Printf("%+v\n", req)
+	for _, dep := range req.Dependencies {
+		fmt.Printf("%+v\n", dep)
+	}
 	if err != nil {
+
 		if err == chartutil.ErrRequirementsNotFound {
 			fmt.Fprintf(m.Out, "No requirements found in %s/charts.\n", m.ChartPath)
 			return nil
@@ -151,6 +156,10 @@ func (m *Manager) Update() error {
 	// Now we need to find out which version of a chart best satisfies the
 	// requirements the requirements.yaml
 	lock, err := m.resolve(req, repoNames, hash)
+	fmt.Printf("%+v\n", lock)
+	for _, dep := range lock.Dependencies {
+		fmt.Printf("%+v\n", dep)
+	}
 	if err != nil {
 		return err
 	}
@@ -183,6 +192,10 @@ func (m *Manager) loadChartDir() (*chart.Chart, error) {
 //
 // This returns a lock file, which has all of the requirements normalized to a specific version.
 func (m *Manager) resolve(req *chartutil.Requirements, repoNames map[string]string, hash string) (*chartutil.RequirementsLock, error) {
+	fmt.Printf("%+v\n", req)
+	for _, dep := range req.Dependencies {
+		fmt.Printf("%+v\n", dep)
+	}
 	res := resolver.New(m.ChartPath, m.HelmHome)
 	return res.Resolve(req, repoNames, hash)
 }

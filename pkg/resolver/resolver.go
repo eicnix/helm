@@ -51,19 +51,24 @@ func (r *Resolver) Resolve(reqs *chartutil.Requirements, repoNames map[string]st
 
 	// Now we clone the dependencies, locking as we go.
 	locked := make([]*chartutil.Dependency, len(reqs.Dependencies))
+	fmt.Printf("%+v\n", locked)
+
+	for _, dep := range locked {
+		fmt.Printf("%+v\n", dep)
+	}
 	missing := []string{}
 	for i, d := range reqs.Dependencies {
+		locked[i] = d
 		if strings.HasPrefix(d.Repository, "file://") {
 
 			if _, err := GetLocalPath(d.Repository, r.chartpath); err != nil {
 				return nil, err
 			}
 
-			locked[i] = &chartutil.Dependency{
-				Name:       d.Name,
-				Repository: d.Repository,
-				Version:    d.Version,
-			}
+			locked[i].Name = d.Name
+			locked[i].Repository= d.Repository
+			locked[i].Version = d.Version
+
 			continue
 		}
 		constraint, err := semver.NewConstraint(d.Version)

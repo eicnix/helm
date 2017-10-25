@@ -1,5 +1,5 @@
-hash: 650f1d4cd9e9dc5ba76480a5465923ce1bbd11b8fa956b644aaf975e8f7e1f33
-updated: 2017-10-12T13:08:50.435765-07:00
+hash: 8fa0f858d28a1233c7f753647faa212c07ba4e261e1b53be95fd2e4a57a88cc1
+updated: 2017-10-24T20:15:44.738078+02:00
 imports:
 - name: cloud.google.com/go
   version: 3b1ae45394a234c385be014e9a488f2bb6eef821
@@ -95,6 +95,8 @@ imports:
   version: d6023ce2651d8eafb5c75bb0c7167536102ec9f5
 - name: github.com/fatih/camelcase
   version: f6a740d52f961c60348ebb109adde9f4635d7540
+- name: github.com/fatih/color
+  version: 570b54cabe6b8eb0bc2dfce68d964677d63b5260
 - name: github.com/ghodss/yaml
   version: 73d445a93680fa1a78ae23a5839bad48f32ba1ee
 - name: github.com/go-openapi/jsonpointer
@@ -136,6 +138,11 @@ imports:
   - ptypes/timestamp
 - name: github.com/google/btree
   version: 7d79101e329e5a3adf994758c578dab82b90c017
+- name: github.com/google/go-jsonnet
+  version: 10d377f06842ecea9f1e7f956dab49f92a3fa566
+  subpackages:
+  - ast
+  - parser
 - name: github.com/google/gofuzz
   version: 44d81051d367757e1c7c6a5a86423ece9afcf63c
 - name: github.com/googleapis/gnostic
@@ -192,6 +199,12 @@ imports:
   version: efda631a76d70875162cdc25ffa0d0164bf69758
 - name: github.com/Masterminds/vcs
   version: 3084677c2c188840777bff30054f2b553729d329
+- name: github.com/mattn/go-colorable
+  version: 5411d3eea5978e6cdc258b30de592b60df6aba96
+  repo: https://github.com/mattn/go-colorable
+- name: github.com/mattn/go-isatty
+  version: 57fdcb988a5c543893cc61bce354a6e24ab70022
+  repo: https://github.com/mattn/go-isatty
 - name: github.com/mattn/go-runewidth
   version: d6bea18f789704b5f83375793155289da36a3c7f
 - name: github.com/matttproud/golang_protobuf_extensions

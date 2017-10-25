@@ -16,7 +16,7 @@ func TestJsonnetRender(t *testing.T) {
 			Engine:  "jsonnet",
 		},
 		Templates: []*chart.Template{
-			{Name: "templates/test.jsonnet", Data: []byte(`function(Values, Release, Chart) Values.name`)},
+			{Name: "templates/test.jsonnet", Data: []byte(`function(Values, Chart)Chart.name`)},
 		},
 		Values: &chart.Config{
 			Raw: "name: Test",
@@ -36,45 +36,9 @@ func TestJsonnetRender(t *testing.T) {
 		t.Errorf("Failed to render templates: %s", err)
 	}
 
-	for name, tpl := range out {
-		println(name)
-		println(tpl)
+	expected := "moby"
+
+	if expected != out["moby/templates/test.jsonnet"] {
+		t.Errorf("Expected '%s', got %s", expected, out["moby/templates/test.jsonnet"])
 	}
-
-}
-
-func TestJsonnetWithDependencies(t *testing.T) {
-	e := NewJsonnetEngine()
-	deptpl := `{Person: {Name: "test"}}`
-	toptpl := `local lib = import "innerchart/templates/_lib.jsonnet"; {Person: lib.Person{Name:  "Test4"}}`
-	ch := &chart.Chart{
-		Metadata: &chart.Metadata{Name: "outerchart"},
-		Templates: []*chart.Template{
-			{Name: "templates/outer", Data: []byte(toptpl)},
-		},
-		Dependencies: []*chart.Chart{
-			{
-				Metadata: &chart.Metadata{Name: "innerchart"},
-				Templates: []*chart.Template{
-					{Name: "templates/_lib.jsonnet", Data: []byte(deptpl)},
-				},
-			},
-		},
-	}
-
-	out, err := e.Render(ch, map[string]interface{}{})
-
-	if err != nil {
-		t.Fatalf("failed to render chart: %s", err)
-	}
-
-	if len(out) != 2 {
-		t.Errorf("Expected 2, got %d", len(out))
-	}
-
-	expect := "Hello World"
-	if out["outerchart/templates/outer"] != expect {
-		t.Errorf("Expected %q, got %q", expect, out["outer"])
-	}
-
 }
